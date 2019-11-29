@@ -21,7 +21,7 @@ import com.springboot.restapi.services.ProductService;
 @RestController
 @RequestMapping("/product")
 @Api(value="onlinestore", description="Operations pertaining to products in Online Store")
-public class RestApiController {
+public class productController {
 
 	private ProductService productService;
 

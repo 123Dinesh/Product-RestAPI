@@ -3,9 +3,9 @@
 	<modelVersion>4.0.0</modelVersion>
 
 	<groupId>com.springboot.restapi</groupId>
-	<artifactId>restapi</artifactId>
-	<version>0.0.1-SNAPSHOT</version>
-	<packaging>war</packaging>
+	<artifactId>product-service</artifactId>
+	<version>1.0-SNAPSHOT</version>
+	<packaging>jar</packaging>
 
 	<name>restapi</name>
 	<description>Demo project for Spring Boot</description>
@@ -22,6 +22,10 @@
 		<project.reporting.outputEncoding>UTF-8</project.reporting.outputEncoding>
 		<java.version>1.8</java.version>
 		<spring-cloud.version>Edgware.RELEASE</spring-cloud.version>
+		<docker.directory>${basedir}/container</docker.directory>
+		<docker.image.prefix>20170918</docker.image.prefix>
+		<docker.image.name>product-service</docker.image.name>
+		<executable.jar.name>product-service</executable.jar.name>
 	</properties>
 
 	<dependencies>
@@ -96,35 +100,43 @@
 
 	<build>
 		<plugins>
-			<plugin>
-				<groupId>org.springframework.boot</groupId>
-				<artifactId>spring-boot-maven-plugin</artifactId>
-			</plugin>
 			
+			<!-- Docker -->
 			<plugin>
-            <groupId>org.apache.maven.plugins</groupId>
-            <artifactId>maven-dependency-plugin</artifactId>
-            <version>2.3</version>
-            <executions>
-                <execution>
-                    <phase>package</phase>
-                    <goals><goal>copy</goal></goals>
-                    <configuration>
-                        <artifactItems>
-                            <artifactItem>
-                         <groupId>com.github.jsimone</groupId>
-                        <artifactId>webapp-runner</artifactId>
-                                <version>8.0.30.2</version>
-                     <destFileName>webapp-runner.jar</destFileName>
-                            </artifactItem>
-                        </artifactItems>
-                    </configuration>
-                </execution>
-            </executions>
+				<groupId>com.spotify</groupId>
+				<artifactId>dockerfile-maven-plugin</artifactId>
+				<configuration>
+				<repository>${docker.image.prefix}/${docker.image.name}</repository>
+			 	<images>
+				<image>${docker.image.name}</image>
+				<tag>latest</tag> 
+				</images>
+				<resources>
+						<resource>
+							<targetPath>/</targetPath>
+							<directory>${project.build.directory}</directory>
+							<include>${executable.jar.name}.jar</include>
+						</resource>
+					</resources>
+					<useMavenSettingsForAuth>true</useMavenSettingsForAuth>
+					<skip>false</skip>
+				</configuration>
+			   <executions>
+					<execution>
+						<id>default</id>
+						<phase>install</phase>
+						<goals>
+							<goal>build</goal>
+							<goal>push</goal>
+						</goals>
+					</execution>
+				</executions> 
+			</plugin>
+			 <plugin>
+            <groupId>org.springframework.boot</groupId>
+            <artifactId>spring-boot-maven-plugin</artifactId>
         </plugin>
-
 		</plugins>
-
 	</build>
 
 
