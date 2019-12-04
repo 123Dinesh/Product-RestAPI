@@ -40,7 +40,20 @@ node {
             pushToImage(CONTAINER_NAME, CONTAINER_TAG, USERNAME, PASSWORD)
             }
         }
-   
+   stage('kubernetes set up'){
+       try{
+            sh "kubectl create -f product-service-deployment.yml"
+           
+       }catch(e){
+           
+           notify("something failed kubernetes setup")
+           throw e;
+       }
+
+notify("process finish")
+       
+   }
+
     stage('Run App'){
     
         environment {
@@ -52,6 +65,13 @@ node {
         runApp(CONTAINER_NAME, CONTAINER_TAG, DOCKER_HUB_USER, HTTP_PORT)
     }
 
+}
+
+def notify(string message){
+    
+     slackSend (color: '#FFFF00', message: "${message}: Job '${env.JOB_NAME} [${env.BUILD_NUMBER}]' (${env.BUILD_URL})")
+
+    
 }
 
 def imagePrune(containerName){
