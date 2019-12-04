@@ -109,11 +109,12 @@
 				<artifactId>dockerfile-maven-plugin</artifactId>
 				<configuration>
 				 <authConfig>
-                        <push>
+				 
                             <username>20170918</username>
                             <password>{q4mg5dpmLlEH8XckY520TIVrl+EWMeh/eeIrXX8UhXw=}</password>
-                        </push>
+                        
                     </authConfig>
+                    
 				<repository>${docker.image.prefix}/${docker.image.name}</repository>
 			 	<images>
 				<image>${docker.image.name}</image>
@@ -126,7 +127,7 @@
 							<include>${executable.jar.name}.jar</include>
 						</resource>
 					</resources>
-					<useMavenSettingsForAuth>true</useMavenSettingsForAuth>
+				<!-- 	<useMavenSettingsForAuth>true</useMavenSettingsForAuth> -->
 					<skip>false</skip>
 				</configuration>
 			   <executions>
@@ -135,7 +136,7 @@
 						<phase>install</phase>
 						<goals>
 							<goal>build</goal>
-							<goal>push</goal>
+							<!-- <goal>push</goal> -->
 						</goals>
 					</execution>
 				</executions> 
