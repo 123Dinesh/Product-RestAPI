@@ -131,15 +131,15 @@
 					<skip>false</skip>
 				</configuration>
 			   <executions>
-					<execution>
+				<!-- 	<execution>
 						<id>default</id>
 						<phase>install</phase>
 						<goals>
 							<goal>build</goal>
-							<!-- <goal>push</goal> -->
+							<goal>push</goal>
 						</goals>
 					</execution>
-				</executions> 
+			 -->	</executions> 
 			</plugin>
 			 <plugin>
             <groupId>org.springframework.boot</groupId>
