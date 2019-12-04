@@ -67,7 +67,7 @@ notify("process finish")
 
 }
 
-def notify(string message){
+def notify(String message){
     
      slackSend (color: '#FFFF00', message: "${message}: Job '${env.JOB_NAME} [${env.BUILD_NUMBER}]' (${env.BUILD_URL})")
 
