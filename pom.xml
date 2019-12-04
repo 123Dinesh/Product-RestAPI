@@ -26,6 +26,8 @@
 		<docker.image.prefix>20170918</docker.image.prefix>
 		<docker.image.name>product-service</docker.image.name>
 		<executable.jar.name>product-service</executable.jar.name>
+		<docker.username>20170918</docker.username>
+		<docker.password>{q4mg5dpmLlEH8XckY520TIVrl+EWMeh/eeIrXX8UhXw=}</docker.password>
 	</properties>
 
 	<dependencies>
