@@ -3,11 +3,13 @@ def CONTAINER_TAG="latest"
 def DOCKER_HUB_USER="20170918"
 def HTTP_PORT="8090"
 
+
 node {
 
     stage('Initialize'){
         def dockerHome = tool 'myDocker'
         def mavenHome  = tool 'myMaven'
+    
         env.PATH = "${dockerHome}/bin:${mavenHome}/bin:${env.PATH}"
     }
 
@@ -40,18 +42,18 @@ node {
             pushToImage(CONTAINER_NAME, CONTAINER_TAG, USERNAME, PASSWORD)
             }
         }
-   stage('kubernetes set up'){
+   stage('kubernetes set up')
+   withCredentials([usernamePassword(credentialsId: 'myKubernetesCluster',
+                                  passwordVariable: 'CERT_PASSWORD',
+                                  usernameVariable: 'CERT_USER')]) {
        try{
             sh "kubectl create -f product-service-deployment.yml"
-           
+           echo "deployment done.."
        }catch(e){
-           
-           notify("something failed kubernetes setup")
+            echo "something failed kubernetes setup"
            throw e;
        }
-
-notify("process finish")
-       
+             
    }
 
     stage('Run App'){
@@ -72,6 +74,13 @@ def notify(String message){
      slackSend (color: '#FFFF00', message: "${message}: Job '${env.JOB_NAME} [${env.BUILD_NUMBER}]' (${env.BUILD_URL})")
 
     
+}
+
+def deploy(username,password){
+    sh "docker login -u $dockerUser -p $dockerPassword"
+    echo "$dockerUser"
+    sh "docker push $dockerUser/$containerName:$tag"
+    echo "Image push complete"
 }
 
 def imagePrune(containerName){
