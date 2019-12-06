@@ -3,7 +3,6 @@ def CONTAINER_TAG="latest"
 def DOCKER_HUB_USER="20170918"
 def HTTP_PORT="8090"
 
-
 node {
 
     stage('Initialize'){
