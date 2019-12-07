@@ -14,26 +14,32 @@ spec:
       labels:
         app: jenkins
     spec:
-      securityContext:
-       runAsUser: 0
-      containers:
+     hostNetwork: true
+     securityContext:
+        runAsUser: 0
+     containers:
       - name: my-jenkins
         image: 20170918/jenkins:latest
         imagePullPolicy: "Always"
+        
         ports:
         - containerPort: 8080
         volumeMounts:
-            - name: jenkins-data
-              mountPath: /var/jenkins_home
+            - name: jenkins-home
+              mountPath: /var/jenkins-home
             - name: docker-socket
               mountPath: /var/run/docker.sock
-      volumes:
-        - name: jenkins-data
+     volumes:
+        - name: jenkins-home
           hostPath: 
-              path: /var/lib/docker/volumes/jenkins_data/_data
+              path: /var/lib/docker/volumes/jenkins-home/_data
                
         - name: docker-socket
           hostPath: 
               path: /var/run/docker.sock
+     
+     imagePullSecrets:
+               - name: regcred
+      
           
           
