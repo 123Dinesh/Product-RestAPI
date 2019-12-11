@@ -5,7 +5,7 @@ metadata:
   labels:
     app: jenkins
 spec:
-  replicas: 1
+  replicas: 2
   selector:
     matchLabels:
       app: jenkins
@@ -21,7 +21,6 @@ spec:
       - name: my-jenkins
         image: 20170918/jenkins:latest
         imagePullPolicy: "Always"
-        
         ports:
         - containerPort: 8080
         volumeMounts:

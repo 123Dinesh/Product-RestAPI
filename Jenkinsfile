@@ -42,11 +42,11 @@ node {
             }
         }
    stage('kubernetes set up')
-   withCredentials([usernamePassword(credentialsId: 'myKubernetesCluster',
-                                  passwordVariable: 'CERT_PASSWORD',
-                                  usernameVariable: 'CERT_USER')]) {
+   withKubeConfig([credentialsId: '', serverUrl: 'https://192.168.99.102:8443']) {
        try{
-            sh "kubectl create -f product-service-deployment.yml"
+       
+             sh "kubectl cluster-info"
+           // sh "kubectl create -f product-service-deployment.yml"
            echo "deployment done.."
        }catch(e){
             echo "something failed kubernetes setup"
