@@ -42,7 +42,7 @@ node {
             }
         }
    stage('kubernetes set up')
-   withKubeConfig([credentialsId: '', serverUrl: 'https://192.168.99.102:8443']) {
+   withKubeConfig([credentialsId: '0c1cca99-ab7e-4865-bc00-3acc7d11c2f5', serverUrl: 'https://192.168.99.102:8443']) {
        try{
        
              sh "kubectl cluster-info"

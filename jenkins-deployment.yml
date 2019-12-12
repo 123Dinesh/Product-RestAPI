@@ -19,13 +19,15 @@ spec:
         runAsUser: 0
      containers:
       - name: my-jenkins
-        image: 20170918/jenkins:latest
+        image: 20170918/jenkins-kubectl:latest
+        securityContext:
+          privileged: true
         imagePullPolicy: "Always"
         ports:
         - containerPort: 8080
         volumeMounts:
             - name: jenkins-home
-              mountPath: /var/jenkins-home
+              mountPath: /var/jenkins_home
             - name: docker-socket
               mountPath: /var/run/docker.sock
      volumes:
@@ -36,7 +38,7 @@ spec:
         - name: docker-socket
           hostPath: 
               path: /var/run/docker.sock
-     
+    
      imagePullSecrets:
                - name: regcred
       

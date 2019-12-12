@@ -1,3 +1,2 @@
-FROM jenkins/jenkins:lts
-USER root
-COPY --from=lachlanevenson/k8s-kubectl:v1.10.3 /usr/local/bin/kubectl /usr/local/bin/kubectl	
+FROM cirolini/jenkins-docker-kubectl:latest
+USER root	
