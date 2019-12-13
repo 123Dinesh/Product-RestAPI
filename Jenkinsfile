@@ -46,7 +46,10 @@ node {
        try{
        
              sh "kubectl cluster-info"
-             sh "kubectl create -f product-service-deployment.yml"
+             sh "kubectl delete deployement product-deployment"
+             sh "kubectl create -f product-deployment.yml"
+             sh "kubectl delete svc product-service"
+             sh "kubectl create -f product-service.yml"
            echo "deployment done.."
        }catch(e){
             echo "something failed kubernetes setup"

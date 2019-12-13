@@ -1,7 +1,7 @@
 apiVersion: apps/v1beta1
 kind: Deployment
 metadata:
-  name: product-service-deployment
+  name: product-deployment
   labels:
     app: product-service
 spec:
