@@ -3,7 +3,9 @@ kind: Deployment
 metadata:
   name: product-deployment
   labels:
+    build_number: ${BUILD_NUMBER}
     app: product-service
+    role: rolling-update 
 spec:
   replicas: 2
   selector:
@@ -20,3 +22,5 @@ spec:
         imagePullPolicy: "Always"
         ports:
         - containerPort: 8080
+  strategy:
+      type: RollingUpdate
