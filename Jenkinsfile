@@ -46,7 +46,7 @@ node {
        try{
        
              sh "kubectl cluster-info"
-           // sh "kubectl create -f product-service-deployment.yml"
+             sh "kubectl create -f product-service-deployment.yml"
            echo "deployment done.."
        }catch(e){
             echo "something failed kubernetes setup"
@@ -105,7 +105,7 @@ def pushToImage(containerName, tag, dockerUser, dockerPassword){
 
 def runApp(containerName, tag, dockerHubUser, httpPort){
     sh "docker pull $dockerHubUser/$containerName"
-    sh "kubectl get pods"
+  //  sh "kubectl get pods"
     //sh "docker pull amazon/dynamodb-local:latest"
    // sh "docker run -d --rm -p 8000:8000 --name dynamodb amazon/dynamodb-local:latest"
     //  "docker-compose -f docker-compose-tx-user-service.yml up -d"
