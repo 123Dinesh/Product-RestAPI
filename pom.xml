@@ -108,13 +108,6 @@
 				<groupId>com.spotify</groupId>
 				<artifactId>dockerfile-maven-plugin</artifactId>
 				<configuration>
-				 <authConfig>
-				 
-                            <username>20170918</username>
-                            <password>{q4mg5dpmLlEH8XckY520TIVrl+EWMeh/eeIrXX8UhXw=}</password>
-                        
-                    </authConfig>
-                    
 				<repository>${docker.image.prefix}/${docker.image.name}</repository>
 			 	<images>
 				<image>${docker.image.name}</image>
@@ -131,15 +124,15 @@
 					<skip>false</skip>
 				</configuration>
 			   <executions>
-				<!-- 	<execution>
+				 	<execution>
 						<id>default</id>
 						<phase>install</phase>
 						<goals>
 							<goal>build</goal>
-							<goal>push</goal>
+							<!-- <goal>push</goal> -->
 						</goals>
 					</execution>
-			 -->	</executions> 
+			 	</executions> 
 			</plugin>
 			 <plugin>
             <groupId>org.springframework.boot</groupId>

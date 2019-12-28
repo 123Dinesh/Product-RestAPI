@@ -1,5 +1,5 @@
-kind: Service
 apiVersion: v1
+kind: Service
 metadata:
   name: product-service
   labels:
@@ -10,5 +10,5 @@ spec:
   ports:
      - name: http
        port: 8080
-       targetPort: 8080
+       nodePort: 30062
   type: LoadBalancer
